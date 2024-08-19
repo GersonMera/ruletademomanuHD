@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro y Ruleta de Premios</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none; /* Para Chrome y Safari */
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+        <div class="banner"></div>
+    </div>
+
+    <div class="divide">
+        <div class="container" id="registro-container">
+            <h2>REGISTRO DE USUARIO</h2>
+            <input type="text" id="dni-input" placeholder="DNI" maxlength="8" oninput="validateDNIInput(this)">
+            <button id="registro-button">REGISTRARSE</button>
+        </div>
+        <div class="container" id="ruleta-container" style="display: none;">
+            <div class="imgmanu"><img src="imagenes/manu.jpg" width="200" height="200" alt=""></div>
+            
+            <h1>Ruleta de Premios</h1>
+            
+            <div class="wheel-container">
+                <div class="wheel" id="wheel">
+                    <div class="segment" data-prize="Descuento 10%"><span>Nada</span></div>
+                    <div class="segment" data-prize="Un Frappuchino"><span>Vale de consumo</span></div>
+                    <div class="segment" data-prize="Vale de consumo"><span>Un Frappuchino</span></div>
+                    <div class="segment" data-prize="Nada"><span>Descuento 10%</span></div>
+                </div>
+                <div class="pointer"></div>
+                <div id="hand" class="hand-animation hidden"></div> <!-- Animación de la mano -->
+            </div>
+            <div id="result"></div>
+        </div>
+        <div id="premio-popup" class="premio-popup">
+            <div class="premio-content">
+                <h2>¡Felicidades!</h2>
+                <p id="premio-mensaje"></p>
+            </div>
+        </div>
+    
+        <audio id="spin-sound" src="sonido/m.mp3"></audio>
+        <audio id="winner-sound" src="sonido/bites-ta-da-winner.mp3"></audio>
+        <script src="js/script.js"></script>
+    </div>
+    <script>
+        function validateDNIInput(input) {
+            let value = input.value.replace(/[^0-9]/g, ''); // Eliminar caracteres no numéricos
+            if (value.length > 8) {
+                value = value.slice(0, 8); // Limitar a 8 dígitos
+            }
+            input.value = value;
+        }
+
+        function validatePhoneInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, ''); // Solo números
+        }
+    </script>
+    <script src="js/formulario.js" defer></script>
+</body>
+</html>
